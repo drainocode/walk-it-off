@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walk It Off</title>
+<meta name="description" content="Turn a tough shift into a walking debrief. An open-weight model plans the talk on your own machine, then your phone goes in your pocket.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Walk It Off</h1>
+  <p>Turn a hard shift into a walking debrief. An open-weight model plans the talk on your own machine. Then the phone goes in your pocket and you go outside.</p>
+</header>
+<main>
+  <section class="card" id="setup">
+    <h2>1. What happened today</h2>
+    <p class="note">Everything you type here stays in this browser. The model runs on this computer, so a colleague's bad day is never sent to a server.</p>
+    <div class="two">
+      <div>
+        <label for="who">Who are you walking with (first name or initials)</label>
+        <input id="who" placeholder="e.g. Tolu">
+      </div>
+      <div>
+        <label for="mins">How long is the walk</label>
+        <select id="mins">
+          <option value="10">10 minutes (round the block)</option>
+          <option value="15" selected>15 minutes</option>
+          <option value="20">20 minutes</option>
+          <option value="30">30 minutes (proper walk)</option>
+        </select>
+      </div>
+    </div>
+    <label for="notes">The notes you would normally read off the screen (QA notes, the call that went wrong, what you saw)</label>
+    <textarea id="notes" placeholder="e.g. Third week on the floor. Long hold on a refund call, customer asked for a supervisor twice, Tolu went quiet and read the script. Recovered on the next call. Average handle time fine, empathy score low."></textarea>
+    <label for="goal">The one thing you want them to walk back in with</label>
+    <input id="goal" placeholder="e.g. Feel OK about the bad call and have one line ready for the next angry customer">
+    <h2 style="margin-top:18px">2. Where the model runs</h2>
+    <div class="two">
+      <div>
+        <label for="engineKind">Engine</label>
+        <select id="engineKind">
+          <option value="webllm">In this browser tab (WebGPU, works offline after first download)</option>
+          <option value="ollama">Ollama on this computer</option>
+          <option value="demo">Demo (no model, for a quick look)</option>
+        </select>
+      </div>
+      <div id="modelBox">
+        <label for="model">Model</label>
+        <select id="model"></select>
+        <input id="ollamaModel" class="hidden" value="gemma3:4b">
+      </div>
+    </div>
+    <div class="row">
+      <button id="planBtn">Plan the walk</button>
+      <span class="note" id="engineNote"></span>
+    </div>
+    <div id="status"></div>
+    <div class="bar"><i id="bar"></i></div>
+  </section>
+
+  <section class="card hidden" id="plan">
+    <h2>3. The walk</h2>
+    <p class="note">Edit anything that does not sound like you. Prompts are spoken aloud at each time mark, so you can keep the phone in your pocket.</p>
+    <div id="stops"></div>
+    <div class="row">
+      <button id="startBtn">Start the walk on this device</button>
+      <button class="ghost" id="phoneBtn">Send to my phone</button>
+      <button class="ghost" id="printBtn">Print a pocket card</button>
+    </div>
+    <div id="phoneBox" class="hidden noprint">
+      <p class="note">Scan this on your phone. The plan travels inside the link after the # sign, which browsers never send to the server, and your notes are not in it at all.</p>
+      <div id="qr"></div>
+      <p class="note"><a id="phoneLink" href="#">Or open this link</a></p>
+    </div>
+  </section>
+
+  <section class="card" id="log">
+    <h2>Walks so far</h2>
+    <div class="scroll-x"><table><thead><tr><th>Date</th><th>With</th><th>Minutes</th><th>What they will try</th></tr></thead></tbody id="logBody"></tbody></table></div>
+    <div class="row"><button class="ghost" id="csvBtn">Export CSV</button></div>
+  </section>
+</main>
+
+<div id="walk" class="hidden">
+  <div class="note" id="walkWho"></div>
+  <div class="clock" id="clock">0:00</div>
+  <div class="now" id="now">Put the phone in your pocket. I will speak at each stop.</div>
+  <div class="next" id="next"></div>
+  <div class="row" style="justify-content:center">
+    <button class="ghost" id="repeatBtn">Say it again</button>
+    <button class="ghost" id="endBtn">End walk</button>
+  </div>
+  <div id="after" class="hidden" style="width:100%;max-width:520px;text-align:left">
+    <label for="commit">Back inside: what did they say they will try tomorrow? (their words)</label>
+    <input id="commit">
+    <div class="row"><button id="saveBtn">Save and close</button></div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
