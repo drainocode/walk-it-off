@@ -1,5 +1,5 @@
 // Walk mode: the phone speaks each prompt at its time mark, then saves the
-/ one thing the agent said they will try. Nothing leaves the device.
+ the agent said they will try. Nothing leaves the device.
 
 const $ = id => document.getElementById(id);
 const store = {
