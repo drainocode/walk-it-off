@@ -18,7 +18,7 @@ export class Engine {
       const r = await fetch("http://localhost:11434/api/tags");
       if (!r.ok) throw new Error("Ollama answered " + r.status);
       const names = ((await r.json()).models || []).map(m => m.name);
-      if (!names.some(n => n === this.model || n.startsWith(this.model + ":")) throw new Error("Ollama is running but " + this.model + " is not pulled. Run: ollama pull " + this.model);
+      if (!names.some(n => n === this.model || n.startsWith(this.model + ":))) throw new Error("Ollama is running but " + this.model + " is not pulled. Run: ollama pull " + this.model);
       onProgress("Connected to Ollama", 1);
     } else onProgress("Demo mode, no model loaded", 1);
   }
