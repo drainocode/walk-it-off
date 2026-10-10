@@ -11,7 +11,7 @@ export function marks(p) {
   // spread the stops across the walk, leaving the last couple of minutes for the walk back
   const usable = Math.max(p.mins - 2, p.stops.length);
   return p.stops.map((_, i) => Math.round(1 + (i * (usable - 1)) / Math.max(1, p.stops.length - 1 || 1)));
-}
+} 
 
 // ---------- walk mode ----------
 let current = null, timer = null, startAt = 0, schedule = [], spoken = new Set(), lastSaid = "", wakeLock = null;
